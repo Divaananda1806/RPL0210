@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tirtadewa.id</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-white">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto flex justify-between items-center py-4 px-4">
+            <div class="flex items-center">
+                <img alt="TirtaDewa logo" class="h-10 w-10" src="img/dewa.jpg" />
+                <span class="text-blue-600 text-2xl font-bold ml-2">TirtaDewa</span>
+            </div>
+            <nav class="space-x-2">
+                <a class="text-blue-600 hover:text-blue-800" href="Tirtadewa.html">Home</a>
+                <a class="text-gray-600 hover:text-gray-800" href="Desa.html">Desa</a>
+                <a class="text-gray-600 hover:text-gray-800" href="Lokasi.html">Lokasi</a>
+                <a class="text-gray-600 hover:text-gray-800" href="Tentang.html">Tentang</a>
+                <button onclick="toggleSearchInput()" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-search"></i>
+                </button>
+                <div id="searchContainer" class="hidden relative">
+                    <input type="text" id="searchInput" placeholder="Cari..." class="border border-gray-300 rounded px-3 py-1" onkeyup="handleSearch(event)">
+                </div>
+            </nav>
+        </div>
+    </header>         
+    <main class="bg-slider relative overflow-hidden">
+        <div class="bg-image-container">
+            <img src="img/ngada.jpg" alt="Background 1" class="bg-image">
+            <img src="img/logo BALi.png" alt="Background 2" class="bg-image">
+            <img src="img/waerebo.jpg" alt="Background 3" class="bg-image">
+        </div>
+        
+        <div class="container mx-auto py-16 relative z-10">
+            <div class="flex justify-center mb-8">
+                <div class="relative">
+                    <button onclick="toggleDropdown()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center">
+                        Pilih Penampungan
+                        <i class="fas fa-chevron-down ml-2"></i>
+                    </button>
+                    <div id="dropdown" class="hidden absolute mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg z-20">
+                        <ul>
+                            <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-200" onclick="fetchData('penampungan1'); toggleDropdown();">Penampungan 1</a></li>
+                            <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-200" onclick="fetchData('penampungan2'); toggleDropdown();">Penampungan 2</a></li>
+                            <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-200" onclick="fetchData('penampungan3'); toggleDropdown();">Penampungan 3</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="card">
+                    <div class="icon-bg">
+                        <i class="fas fa-thermometer-half text-2xl text-gray-700"></i>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-lg">Suhu</p>
+                        <p class="text-4xl font-bold" id="suhu">Loading...</p>
+                    </div>
+                </div>
+                <div class="card card-alt">
+                    <div class="icon-bg-alt">
+                        <i class="fas fa-tint text-2xl text-white"></i>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-lg">Ketinggian</p>
+                        <p class="text-4xl font-bold" id="ketinggian">Loading...</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="icon-bg">
+                        <i class="fas fa-door-closed text-2xl text-gray-700"></i>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-lg">Status Penampungan</p>
+                        <p class="text-4xl font-bold" id="status">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>    
+    
+    
+    <section class="bg-blue-500 py-12">
+        <div class="container mx-auto bg-white p-6 rounded-lg">
+            <h2 class="text-center text-xl font-bold mb-6">
+                Sistem Pemantauan Ketinggian Penampungan Air Desa Dadawea
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                <div class="text-center">
+                    <canvas id="temperatureChart" width="300" height="200"></canvas>
+                    <p class="mt-4 text-blue-600 font-bold">Suhu Air</p>
+                </div>
+                <div>
+                    <canvas id="waterLevelChart" width="300" height="200"></canvas>
+                    <p class="text-center text-blue-600 font-bold mt-2">Ketinggian Air</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="bg-white py-4">
+        <div class="container mx-auto flex flex-col items-center justify-center px-6">
+            <div class="flex items-center mb-2">
+                <a href="https://www.instagram.com/kemah.budaya/" target="_blank" class="text-blue-600 hover:text-blue-800">
+                    <i class="fab fa-instagram" style="font-size: 2rem;"></i> 
+                </a>
+                <a href="https://kbkm.kemdikbud.go.id/" target="_blank" class="text-blue-600 hover:text-blue-800">
+                    <img alt="Logo" class="h-10 w-25" src="img/KBKM.png" />
+                </a>
+                <span class="text-sm text-gray-700 ml-2">© Copyright TirtaDewa App Kemah Budaya Kaum Muda 2024 Dadawea</span>
+            </div>
+            <div class="flex justify-center">
+                <span class="text-sm text-gray-700 text-center">
+                    <b>
+                Direktorat Pembinaan Tenaga dan Lembaga Kebudayaan, Direktorat Jenderal Kebudayaan Republik Indonesia, 
+                    </b>
+                </span>
+            </div> 
+            <div class="flex justify-center">
+                <span class="text-sm text-gray-700 text-center">
+                    <b> 
+                Kementrian Pendidikan, Kebudayaan, Riset, dan Teknologi
+                    </b>
+                </span>
+            </div>                
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="tirtadewa.js"></script>
+
+</body>
+</html>

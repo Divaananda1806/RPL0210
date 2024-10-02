@@ -1,0 +1,66 @@
+/* Gaya untuk background bergerak */
+.bg-slider {
+    position: relative;
+    overflow: hidden;
+    height: 64vh; /* Tinggi background */
+}
+
+.bg-slider img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: slide 12s infinite; /* Durasi animasi */
+}
+
+@keyframes slide {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    30% { opacity: 1; }
+    40% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.bg-slider img:nth-child(2) {
+    animation-delay: 4s; /* Delay untuk gambar kedua */
+}
+
+.bg-slider img:nth-child(3) {
+    animation-delay: 8s; /* Delay untuk gambar ketiga */
+}
+
+/* Gaya untuk card */
+.card {
+    background-color: #3b82f6; /* bg-blue-500 */
+    color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-alt {
+    background-color: #bfdbfe; /* bg-blue-100 */
+    color: #3b82f6; /* text-blue-500 */
+}
+
+/* Gaya untuk icon */
+.icon-bg {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.icon-bg-alt {
+    background-color: #3b82f6; /* bg-blue-500 */
+    padding: 1rem;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+/* Gaya untuk heading */
+h2 {
+    color: #3b82f6; /* text-blue-500 */
+}
